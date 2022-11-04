@@ -4,12 +4,19 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AuthInterceptorService } from './auth-interceptor.service';
+import { AuthComponent } from './auth/auth/auth.component';
+import { HomeComponent } from './home/home.component';
+import { ShortenPipe } from './shorten.pipe';
+const appRoute:Routes=[
+{path:'',component:HomeComponent},
+{path:'auth',component:AuthComponent}
+]
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, FormsModule, HttpClientModule],
+  declarations: [AppComponent, AuthComponent, HomeComponent, ShortenPipe],
+  imports: [BrowserModule, FormsModule, HttpClientModule,RouterModule.forRoot(appRoute)],
   providers: [
     {
       provide:HTTP_INTERCEPTORS,

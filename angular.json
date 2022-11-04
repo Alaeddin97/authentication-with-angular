@@ -63,6 +63,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 3001
+          },
           "configurations": {
             "production": {
               "browserTarget": "first-app:build:production"

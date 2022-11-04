@@ -1,0 +1,28 @@
+<div class="container">
+
+  <div *ngIf="error" class="alert alert-danger">
+    <h2>Error occured</h2>
+    {{error | shorten:21}}
+    <button class="btn btn-danger" (click)="error=null">Get it</button>
+  </div>
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
+  
+      <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" id="email" class="form-control" [(ngModel)]="email" name="email" required >
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="text" id="password" class="form-control" [(ngModel)]="password" name="password" required minlength="6">
+        </div>
+
+      <div>
+         <button class="btn btn-primary" type="submit" [disabled]="!form.valid">{{isLogInMode===true?'Log in':'Sign up'}}</button>
+          | <button class="btn btn-primary" type="button" (click)="onSwitch()">Switch to {{isLogInMode===true?'Sign up':'Log in'}}</button>
+      </div>
+      <hr>
+      <a routerLink="" style="cursor: pointer;">Back to Home</a>
+  </form>
+</div>
+

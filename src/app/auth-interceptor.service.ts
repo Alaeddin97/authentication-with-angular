@@ -7,7 +7,7 @@ export class AuthInterceptorService{
 
     console.log("Request is in its way !");
     
-    const modifiedReq=req.clone({headers:req.headers.append('auth','xyz')})
-    return next.handle(modifiedReq);
+    //const modifiedReq=req.clone({headers:req.headers.append('auth','xyz')})
+    return next.handle(req);
    }
 }
