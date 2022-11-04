@@ -55,4 +55,8 @@ export class HomeComponent implements OnInit {
     this.isFetching = false;
   }
 
+  logout(){
+    this.authService.onLogout();
+  }
+
 }
