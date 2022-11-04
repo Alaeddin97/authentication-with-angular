@@ -10,7 +10,7 @@ import { AuthComponent } from './auth/auth/auth.component';
 import { HomeComponent } from './home/home.component';
 import { ShortenPipe } from './shorten.pipe';
 const appRoute:Routes=[
-{path:'',component:HomeComponent},
+{path:'home',component:HomeComponent},
 {path:'auth',component:AuthComponent}
 ]
 

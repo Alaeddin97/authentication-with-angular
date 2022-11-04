@@ -1,7 +1,7 @@
 <div class="container">
     <br>
     <br>
-    <a class="btn btn-success" routerLink="/auth">Authenticate </a>
+    <a class="btn btn-success" routerLink="/auth" *ngIf="isAuthenticated">Authenticate </a> | <a  class="btn btn-danger" routerLink="/auth">Logout</a>
     <hr>
     <div class="row">
       <div class="col-xs-12 col-md-6 col-md-offset-3">

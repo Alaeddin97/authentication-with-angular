@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth-service.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class AuthComponent implements OnInit {
   email: string;
   password: string;
   error: string = null;
-  constructor(private authService: AuthService) {}
+
+  constructor(private authService: AuthService,private router:Router) {}
 
   ngOnInit(): void {}
 
@@ -22,6 +24,7 @@ export class AuthComponent implements OnInit {
       this.authService.signup(this.email, this.password).subscribe(
         (data) => {
           console.log(data);
+          this.router.navigate(['/home']);
         },
         (error) => {
           this.error = error.message;
@@ -31,6 +34,7 @@ export class AuthComponent implements OnInit {
       this.authService.login(this.email, this.password).subscribe(
         (data) => {
           console.log(data);
+          this.router.navigate(['/home']);
         },
         (error) => {
           this.error = error.message;

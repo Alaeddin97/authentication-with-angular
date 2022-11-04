@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth/auth-service.service';
 import { Post } from '../post.model';
 import { PostService } from '../posts.service';
 
@@ -12,20 +13,19 @@ export class HomeComponent implements OnInit {
   loadedPosts = [];
   isFetching: boolean;
   error = null;
+  isAuthenticated:boolean;
   constructor(
-    private postService: PostService
+    private postService: PostService,private authService:AuthService
   ) {}
 
   ngOnInit() {
-    this.isFetching = true;
-    this.postService.fetchPosts().subscribe((posts) => {
-      this.isFetching = false;
-      this.loadedPosts = posts;
-    });
-    this.postService.error.subscribe((error) => {
-      this.isFetching = false;
-      this.error = error;
-    });
+    this.authService.user.subscribe(
+      (user)=>{
+        console.log(`user: ${user}`);
+        this.isAuthenticated=!!user;
+      }
+    )
+
   }
 
   onCreatePost(postData: Post) {

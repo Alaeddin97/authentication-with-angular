@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { User } from '../user/user.model';
 
 interface AuthResData{
   idToken:string,
@@ -15,6 +18,8 @@ interface AuthResData{
 })
 export class AuthService {
 
+  user=new BehaviorSubject<User>(null);
+
   constructor(private http:HttpClient) { }
 
   signup(email:string,password:string){
@@ -25,7 +30,13 @@ export class AuthService {
         password:password,
         returnSecureToken:true
       }
-    )
+    ).pipe(tap(
+      (resData)=>{
+        const expirationDate=new Date(new Date().getTime()+ +resData.expiresIn*1000);
+        const user=new User(resData.email,resData.lacalIn,resData.idToken,expirationDate);
+        this.user.next(user);
+      }
+    ))
   }
 
   login(email:string,password:string){
@@ -36,6 +47,12 @@ export class AuthService {
         password:password,
         returnSecureToken:true
       }
-    )
+    ).pipe(tap(
+      (resData)=>{
+        const expirationDate=new Date(new Date().getTime()+ +resData.expiresIn*1000);
+        const user=new User(resData.email,resData.lacalIn,resData.idToken,expirationDate);
+        this.user.next(user);
+      }
+    ))
   }
 }

@@ -2,7 +2,8 @@
 
   <div *ngIf="error" class="alert alert-danger">
     <h2>Error occured</h2>
-    {{error | shorten:21}}
+    <!-- {{error | shorten:21}} -->
+    {{error}}
     <button class="btn btn-danger" (click)="error=null">Get it</button>
   </div>
   <form (ngSubmit)="onSubmit()" #form="ngForm">
@@ -21,8 +22,6 @@
          <button class="btn btn-primary" type="submit" [disabled]="!form.valid">{{isLogInMode===true?'Log in':'Sign up'}}</button>
           | <button class="btn btn-primary" type="button" (click)="onSwitch()">Switch to {{isLogInMode===true?'Sign up':'Log in'}}</button>
       </div>
-      <hr>
-      <a routerLink="" style="cursor: pointer;">Back to Home</a>
   </form>
 </div>
 
